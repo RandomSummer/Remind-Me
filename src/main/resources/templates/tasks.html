@@ -3,6 +3,12 @@
 <head>
     <meta charset="UTF-8">
     <title>Todo Application</title>
+    <style>
+        .text-strikethrough {
+            text-decoration: line-through;
+            color: grey;
+        }
+    </style>
 </head>
 <body>
     <h1>Todo Application</h1>
@@ -15,8 +21,13 @@
         </form>
         <th:block th:each="task : ${tasks}">
             <div>
-                <span th:text="${task.title}">Task Title</span>
-                <span th:text="${task.id}">Task ID</span>
+                <span th:classappend="${task.completed} ? 'text-strikethrough'" th:text="${task.title}">Task Title</span>
+                <span th:classappend="${task.completed} ? 'text-strikethrough'" th:text="${task.id}">Task ID</span>
+
+                <div>
+                    <a th:href="@{/{id}/toggle(id=${task.id})}">Toggle</a>
+                    <a th:href="@{/{id}/delete(id=${task.id})}">Delete</a>
+                </div>
             </div>
         </th:block>
     </div>

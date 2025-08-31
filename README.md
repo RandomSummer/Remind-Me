@@ -1,8 +1,41 @@
-# 🎓 Remind-Me: A Smart To-Do Application
 
+<div align="center">
 
+```plaintext
+██████╗ ███████╗███╗   ███╗██╗███╗   ██╗██████╗ ███████╗
+██╔══██╗██╔════╝████╗ ████║██║████╗  ██║██╔══██╗██╔════╝
+██████╔╝█████╗  ██╔████╔██║██║██╔██╗ ██║██║  ██║█████╗
+██╔══██╗██╔══╝  ██║╚██╔╝██║██║██║╚██╗██║██║  ██║██╔══╝
+██║  ██║███████╗██║ ╚═╝ ██║██║██║ ╚████║██████╔╝███████╗
+╚═╝  ╚═╝╚══════╝╚═╝     ╚═╝╚═╝╚═╝  ╚═══╝╚═════╝ ╚══════╝
+```
+</div>
 
-Welcome to **Remind-Me**, a dynamic and responsive full-stack to-do web application built with a modern tech stack. This project is designed as an educational companion to help users organize their learning goals and daily tasks in a seamless, interactive environment. It features a sleek, dark-themed glassmorphism UI that updates in real-time without ever needing a page refresh.
+<div align="center">
+
+### ✨ Your Personal Companion for Learning and Productivity ✨
+
+<p align="center">
+  A full-stack, dynamic to-do list application built with Spring Boot and Thymeleaf. <br />
+  Organize your tasks with a modern, no-refresh UI designed for students and developers.
+</p>
+
+<p align="center">
+    <img src="https://img.shields.io/badge/license-MIT-blue.svg?style=for-the-badge" alt="license">
+    <img src="https://img.shields.io/github/issues/your-username/remind-me?style=for-the-badge" alt="issues">
+    <img src="https://img.shields.io/github/forks/your-username/remind-me?style=for-the-badge" alt="forks">
+    <img src="https://img.shields.io/github/stars/your-username/remind-me?style=for-the-badge" alt="stars">
+</p>
+
+<p align="center">
+    <img src="https://img.shields.io/badge/Java-17-orange?style=for-the-badge&logo=java" alt="Java">
+    <img src="https://img.shields.io/badge/Spring_Boot-6DB33F?style=for-the-badge&logo=spring-boot&logoColor=white" alt="Spring Boot">
+    <img src="https://img.shields.io/badge/Thymeleaf-005F0F?style=for-the-badge&logo=thymeleaf&logoColor=white" alt="Thymeleaf">
+    <img src="https://img.shields.io/badge/Maven-C71A36?style=for-the-badge&logo=apache-maven&logoColor=white" alt="Maven">
+</p>
+
+</div>
+
 
 ---
 

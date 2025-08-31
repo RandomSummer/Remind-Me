@@ -2,34 +2,214 @@
 <html lang="en" xmlns:th="http://www.thymeleaf.org">
 <head>
     <meta charset="UTF-8">
-    <title>Remind-Me</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Remind-Me - Todo Application</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" rel="stylesheet">
     <style>
-        .text-strikethrough {
-            text-decoration: line-through;
-            color: red;
+        body {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            min-height: 100vh;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+
+        .container {
+            max-width: 600px;
+            margin-top: 50px;
+        }
+
+        .app-header {
+            text-align: center;
+            color: white;
+            margin-bottom: 30px;
+        }
+
+        .app-title {
+            font-size: 2.5rem;
+            font-weight: bold;
+            text-shadow: 0 2px 4px rgba(0,0,0,0.3);
+        }
+
+        .add-task-card {
+            background: white;
+            border-radius: 15px;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.2);
+            padding: 30px;
+        }
+
+        .form-floating textarea {
+            min-height: 120px;
+            border: 2px solid #e9ecef;
+            border-radius: 10px;
+            resize: vertical;
+        }
+
+        .form-floating textarea:focus {
+            border-color: #667eea;
+            box-shadow: 0 0 0 0.2rem rgba(102, 126, 234, 0.25);
+        }
+
+        .add-btn {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            border: none;
+            padding: 12px 30px;
+            border-radius: 10px;
+            color: white;
+            font-weight: 600;
+            transition: transform 0.2s;
+        }
+
+        .add-btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 5px 15px rgba(102, 126, 234, 0.4);
+        }
+
+        /* Dashboard Styles */
+        .dashboard-card {
+            background: white;
+            border-radius: 15px;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.2);
+            padding: 25px;
+            margin-top: 20px;
+        }
+
+        .stats-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(120px, 1fr));
+            gap: 15px;
+            margin-top: 15px;
+        }
+
+        .stat-box {
+            background: linear-gradient(135deg, #f8f9ff 0%, #e8f2ff 100%);
+            border: 1px solid #e3f2fd;
+            border-radius: 12px;
+            padding: 20px;
+            text-align: center;
+            transition: transform 0.2s;
+        }
+
+        .stat-box:hover {
+            transform: translateY(-3px);
+        }
+
+        .stat-number {
+            font-size: 2rem;
+            font-weight: bold;
+            color: #667eea;
+            margin-bottom: 5px;
+        }
+
+        .stat-label {
+            font-size: 0.9rem;
+            color: #6c757d;
+            font-weight: 500;
+        }
+
+        .progress-bar-container {
+            margin-top: 15px;
+        }
+
+        .custom-progress {
+            height: 8px;
+            border-radius: 10px;
+            background-color: #e9ecef;
+        }
+
+        .custom-progress-bar {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            border-radius: 10px;
+            transition: width 0.5s ease;
         }
     </style>
 </head>
 <body>
-    <h1>Todo Application</h1>
-    <div>
-        <form action="/" method="post">
-            <div>
-                <input type="text" name="title" placeholder="Add a new task ..." required>
-            </div>
-            <button type="submit">Add</button>
-        </form>
-        <th:block th:each="task : ${tasks}">
-            <div>
-                <span th:classappend="${task.completed} ? 'text-strikethrough'" th:text="${task.title}">Task Title</span>
-                <span th:classappend="${task.completed} ? 'text-strikethrough'" th:text="${task.id}">Task ID</span>
+<div class="container">
+    <!-- App Header -->
+    <div class="app-header">
+        <h1 class="app-title">
+            <i class="fas fa-tasks"></i> Remind-Me
+        </h1>
+        <p class="lead">Stay organized, stay productive</p>
+    </div>
 
-                <div>
-                    <a th:href="@{/{id}/toggle(id=${task.id})}">Toggle</a>
-                    <a th:href="@{/{id}/delete(id=${task.id})}">Delete</a>
+    <!-- Add Task Section -->
+    <div class="add-task-card">
+        <h3 class="mb-4">
+            <i class="fas fa-plus-circle text-primary"></i> Add New Task
+        </h3>
+
+        <form th:action="@{/}" method="post">
+            <div class="form-floating mb-3">
+                    <textarea
+                            class="form-control"
+                            name="title"
+                            id="floatingTextarea"
+                            placeholder="What needs to be done?"
+                            required></textarea>
+                <label for="floatingTextarea">
+                    <i class="fas fa-edit"></i> What needs to be done?
+                </label>
+            </div>
+
+            <div class="d-grid">
+                <button type="submit" class="btn add-btn">
+                    <i class="fas fa-plus"></i> Add Task
+                </button>
+            </div>
+        </form>
+    </div>
+
+    <!-- Dashboard Section -->
+    <div class="dashboard-card" th:if="${tasks != null and !#lists.isEmpty(tasks)}">
+        <h3 class="mb-3">
+            <i class="fas fa-chart-pie text-success"></i> Dashboard
+        </h3>
+
+        <div class="stats-grid">
+            <div class="stat-box">
+                <div class="stat-number" th:text="${#lists.size(tasks)}">0</div>
+                <div class="stat-label">
+                    <i class="fas fa-list"></i> Total Tasks
                 </div>
             </div>
-        </th:block>
+
+            <div class="stat-box">
+                <div class="stat-number">
+                    <span th:text="${#lists.size(tasks)}">0</span>
+                </div>
+                <div class="stat-label">
+                    <i class="fas fa-clock text-warning"></i> Pending
+                </div>
+            </div>
+
+            <div class="stat-box">
+                <div class="stat-number">0</div>
+                <div class="stat-label">
+                    <i class="fas fa-check-circle text-success"></i> Completed
+                </div>
+            </div>
+
+            <div class="stat-box">
+                <div class="stat-number">0%</div>
+                <div class="stat-label">
+                    <i class="fas fa-trophy text-primary"></i> Progress
+                </div>
+            </div>
+        </div>
+
+        <div class="progress-bar-container">
+            <div class="d-flex justify-content-between align-items-center mb-2">
+                <span class="small text-muted">Overall Progress</span>
+                <span class="small fw-bold">0%</span>
+            </div>
+            <div class="custom-progress">
+                <div class="custom-progress-bar" style="width: 0%"></div>
+            </div>
+        </div>
     </div>
+</div>
+
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
 </body>
 </html>

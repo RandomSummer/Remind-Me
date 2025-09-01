@@ -240,17 +240,17 @@
             box-shadow: 0 0 10px rgba(102, 126, 234, 0.5);
         }
 
-        .form-floating textarea {
+        .form-floating input {
             min-height: 120px;
             border: 2px solid rgba(148, 163, 184, 0.3);
             border-radius: 16px;
             resize: vertical;
             background: var(--light-glass);
-            color: #e2e8f0;
+            color: white;
             backdrop-filter: blur(10px);
         }
 
-        .form-floating textarea:focus {
+        .form-floating input:focus {
             border-color: #667eea;
             box-shadow: 0 0 0 0.25rem rgba(102, 126, 234, 0.4);
             background: rgba(51, 65, 85, 0.9);
@@ -637,14 +637,9 @@
 
                 <form id="taskForm" th:action="@{/}" method="post">
                     <div class="form-floating mb-3">
-                        <textarea
-                                class="form-control"
-                                name="title"
-                                id="floatingTextarea"
-                                placeholder="What would you like to accomplish?"
-                                required></textarea>
+                        <input class="form-control" type="text" name="title" id="floatingTextarea" placeholder="Remind task ..." required>
                         <label for="floatingTextarea">
-                            <i class="fas fa-edit"></i> What would you like to accomplish today?
+                            <i class="fas fa-edit"></i> Remind task ...
                         </label>
                     </div>
 
